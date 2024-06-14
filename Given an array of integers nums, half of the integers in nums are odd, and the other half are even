@@ -1,3 +1,33 @@
-nums = [1, 2, 3, 4, 5, 6]
-half_odd_even = [x for x in nums if x % 2 == 0] + [x for x in nums if x % 2 != 0]
-print(half_odd_even)
+#include <stdio.h>
+
+void partitionArray(int nums[], int size) {
+    int left = 0, right = size - 1;
+
+    while (left < right) {
+        while (nums[left] % 2 != 0) {
+            left++;
+        }
+        while (nums[right] % 2 == 0) {
+            right--;
+        }
+        if (left < right) {
+            int temp = nums[left];
+            nums[left] = nums[right];
+            nums[right] = temp;
+        }
+    }
+}
+
+int main() {
+    int nums[] = {3, 1, 4, 1, 5, 9, 2, 6, 5, 3};
+    int size = sizeof(nums) / sizeof(nums[0]);
+
+    partitionArray(nums, size);
+
+    printf("Partitioned Array: ");
+    for (int i = 0; i < size; i++) {
+        printf("%d ", nums[i]);
+    }
+
+    return 0;
+}
